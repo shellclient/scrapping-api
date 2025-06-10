@@ -1,0 +1,6 @@
+Flask
+flask-restful
+flask-cors
+requests
+beautifulsoup4
+waitress
