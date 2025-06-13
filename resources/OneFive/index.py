@@ -49,6 +49,8 @@ class OneFive:
 
             base_url = self.url.split('.com.co')[0] + '.com.co'
 
+            print("Fetching...")
+
             for product in products:
                 name_tag = product.find('h3', class_='card__heading')
                 name = name_tag.get_text(strip=True) if name_tag else 'No name'
