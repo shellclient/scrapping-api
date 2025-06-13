@@ -53,10 +53,6 @@ class OneFive:
                 name_tag = product.find('h3', class_='card__heading')
                 name = name_tag.get_text(strip=True) if name_tag else 'No name'
 
-                price_tag = product.find('span', class_='money')
-                price = price_tag.get_text(
-                    strip=True) if price_tag else 'No price'
-
                 a_tag = product.find('h3', class_='card__heading').find(
                     'a') if product.find('h3', class_='card__heading') else None
                 product_link = base_url + \
@@ -64,7 +60,6 @@ class OneFive:
 
                 product_array.append({
                     'name': name,
-                    'price': price,
                     'product_link': product_link
                 })
 
@@ -121,6 +116,10 @@ class OneFive:
 
                 description_div = s.find(
                     'div', class_='product__description rte quick-add-hidden')
+                
+                price_tag = s.find('span', class_='money')
+                price = price_tag.get_text(
+                    strip=True) if price_tag else 'No price'
 
                 if description_div:
                     description_text = description_div.get_text(
@@ -136,7 +135,8 @@ class OneFive:
                         if img and img.get("src"):
                             img_urls.append(f"https://{img['src'][2:]}")
 
-
+ 
+                product['price'] = price 
                 product['colors'] = colors if colors else 'No colors available'
                 product['sizes'] = sizes if sizes else 'No sizes available'
                 product['img_url'] = img_urls
