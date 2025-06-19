@@ -26,19 +26,9 @@ class OneFive:
         }
         self.product_list = []
 
-    def getRandomAliveProxy(self):
-        '''Get a random alive proxy from ProxyScrape'''
-
-        proxy_list = requests.get(
-            'https://api.proxyscrape.com/v4/free-proxy-list/get?request=get_proxies&protocol=http&proxy_format=ipport&format=json').json()
-
-        rand = random.choice(range(0, proxy_list['total_records']))
-        if proxy_list['proxies'][rand]['alive']:
-            return proxy_list['proxies'][rand]['proxy']
 
     def get_products(self):
-        response = self.sess.get(f'{self.url}', headers=self.headers, proxies={
-            'http': self.getRandomAliveProxy()})
+        response = self.sess.get(f'{self.url}', headers=self.headers)
 
         if response.status_code == 200:
             s = soup(response.text, 'html.parser')
