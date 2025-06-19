@@ -14,7 +14,7 @@ class ShopifyProducts:
         """
         API_VERSION = self.get_latest_version()
 
-        url = f'https://{self.SHOP_NAME}.myshopify.com/admin/api/{API_VERSION}/products.json'
+        url = f'https://{self.SHOP_NAME}.myshopify.com/admin/api/{API_VERSION}/products.json?limit=100'
         
         product_list = []
         
