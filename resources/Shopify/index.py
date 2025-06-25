@@ -1,4 +1,5 @@
 import requests
+from bs4 import BeautifulSoup as soup
 
 
 class ShopifyProducts:
@@ -14,7 +15,7 @@ class ShopifyProducts:
         """
         API_VERSION = self.get_latest_version()
 
-        url = f'https://{self.SHOP_NAME}.myshopify.com/admin/api/{API_VERSION}/products.json?limit=100'
+        url = f'https://{self.SHOP_NAME}.myshopify.com/admin/api/{API_VERSION}/products.json?limit=250'
         
         product_list = []
         
@@ -30,6 +31,7 @@ class ShopifyProducts:
                     product_list.append({
                         "id": product['id'],
                         "title": product['title'],
+                        "description": soup(product['body_html'], "html.parser").get_text(strip=True),
                         "options": [
                             {
                                 "name": option["name"],
